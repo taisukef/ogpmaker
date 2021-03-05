@@ -1,0 +1,47 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>ogpmaker</title>
+<meta property="og:title" content="ogpmaker">
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ogp.sabae.cc/ogpmaker.jpg">
+<meta property="og:image"  content="https://ogp.sabae.cc/ogpmaker.jpg">
+
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/sakura.css/css/sakura.css">
+<style>
+input {
+    width: 50vw;
+}
+</style>
+</head>
+<body>
+
+<h1>ogpmaker</h1>
+<table>
+<tr><td>URL</td><td><input type=text id=url></td></tr>
+<tr><td>タイトル</td><td><input type=text id=title></td></tr>
+<tr><td>画像リンク</td><td><input type=text id=img></td></tr>
+<tr><td></td><td><button id=btn>OGPリンク作成</button></td></tr>
+<tr><td>OGPリンク</td><td><input type=text id=res></td></tr>
+</table>
+
+<script type=module>
+import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js";
+
+btn.onclick = async () => {
+  const data = { url: url.value, title: title.value, img: img.value };
+  for (const name in data) {
+    if (data[name].length == 0) {
+      alert(name + "を記入してください");
+      return;
+    }
+  }
+  const id = await fetchJSON("add", data);
+  res.value = document.location + id;
+};
+</script>
+
+<hr>
+App: CC BY <a href=https://fukuno.jig.jp/3144>@taisukef</a><br>
+Design: <a href=https://github.com/oxalorg/sakura>sakura.css</a><br>
+
+</body>
+</html>
